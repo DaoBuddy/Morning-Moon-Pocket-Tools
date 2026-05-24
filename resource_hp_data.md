@@ -66,7 +66,7 @@ Copy this block for each new observation:
 
 ---
 
-### Primrose / Grass / Tulip
+### Primrose / Grass / Tulip / Red Herb
 - **Type:** Cutting
 
 | D (your damage) | A (hits needed) | HP range |
@@ -74,6 +74,18 @@ Copy this block for each new observation:
 | 5 | 1 | 1 – 5 |
 
 **Estimated HP:** 1–5
+
+---
+
+### Pine Cone
+- **Type:** Breaking
+
+| D (your damage) | A (hits needed) | HP range |
+|-----------------|-----------------|----------|
+| 5 | 2 | 6 – 10 |
+
+**Estimated HP:** 6–10
+
 
 ---
 
