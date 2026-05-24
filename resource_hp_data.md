@@ -95,6 +95,8 @@ Copy this block for each new observation:
 
 | D (your damage) | A (hits needed) | HP range |
 |-----------------|-----------------|----------|
+| 5 | 3 | 11 – 15 |
+| 6 | 3 | 12 – 15 |
 | 12 | 2 | 13 – 24 |
 
 **Estimated HP:** 13–24
@@ -156,7 +158,20 @@ Copy this block for each new observation:
 
 | D (your damage) | A (hits needed) | HP range |
 |-----------------|-----------------|----------|
-| 12 | 5 | 49 – 60 |
 | 5  | 12 | 56 – 60 |
+| 6  | 10 | 56 – 60 |
+| 12 | 5 | 49 – 60 |
 
 **Estimated HP:** 56–60 _(intersection of both ranges)_
+
+---
+
+### Copper Ore
+- **Type:** Breaking
+- **Reward:** 9 Copper
+
+| D (your damage) | A (hits needed) | HP range |
+|-----------------|-----------------|----------|
+| 5               | 6               | 26 – 30  |
+
+**Estimated HP:** 26–30
