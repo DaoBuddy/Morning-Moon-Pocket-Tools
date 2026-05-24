@@ -110,9 +110,10 @@ Copy this block for each new observation:
 
 | D (your damage) | A (hits needed) | HP range |
 |-----------------|-----------------|----------|
-| 6 | 3 | 13 – 18 |
+| 6               | 3               | 13 – 18  |
+| 12              | 2               | 13 – 24  |
 
-**Estimated HP:** 13–18
+**Estimated HP:** 13–18 _(intersection of all ranges)_
 
 ---
 
