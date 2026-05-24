@@ -106,13 +106,26 @@ Copy this block for each new observation:
 
 ### Rock
 - **Type:** Breaking
-- **Reward:** 3 Rock
+- **Reward:** 3 Stone
 
 | D (your damage) | A (hits needed) | HP range |
 |-----------------|-----------------|----------|
 | 6 | 3 | 13 – 18 |
 
 **Estimated HP:** 13–18
+
+---
+
+### Large Rock
+- **Type:** Breaking
+- **Reward:** 12 Stone
+
+| D (your damage) | A (hits needed) | HP range |
+|-----------------|-----------------|----------|
+| 5               | 12              | 56 – 60  |
+| 12              | 5               | 49 – 60  |
+
+**Estimated HP:** 56–60 _(intersection of all ranges)_
 
 ---
 
