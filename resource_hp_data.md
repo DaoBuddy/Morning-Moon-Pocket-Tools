@@ -149,6 +149,7 @@ Copy this block for each new observation:
 | 12              | 4               | 37 – 48  |
 | 5               | 9               | 41 – 45  |
 | 6               | 8               | 43 – 48  |
+| 10              | 5               | 41 – 50  |
 
 **Estimated HP:** 43–45 _(intersection of all ranges)_
 
@@ -162,9 +163,10 @@ Copy this block for each new observation:
 |-----------------|-----------------|----------|
 | 5  | 12 | 56 – 60 |
 | 6  | 10 | 56 – 60 |
-| 12 | 5 | 49 – 60 |
+| 10 | 6  | 51 – 60 |
+| 12 | 5  | 49 – 60 |
 
-**Estimated HP:** 56–60 _(intersection of both ranges)_
+**Estimated HP:** 56–60 _(intersection of all ranges)_
 
 ---
 
