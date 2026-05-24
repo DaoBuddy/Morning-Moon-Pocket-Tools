@@ -15,6 +15,7 @@
 ## Snake
 **HP:** 61  
 **Physical Damage:** 20 - 28  
+**Physical Resistance:** 5%  
 **Debuff:** Blind (5%) 1 Duration
 
 ### Item Drop
@@ -28,6 +29,7 @@
 ## Rock Mole
 **HP:** 110  
 **Physical Damage:** 18 - 32
+**Physical Resistance:** 5%  
 
 ### Item Drop
 | Item Name | Chance | Amount |

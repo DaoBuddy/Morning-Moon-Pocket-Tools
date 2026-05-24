@@ -1,0 +1,82 @@
+name: Monthly Snapshot Release
+
+on:
+  # Run on the 1st of every month at 00:00 UTC
+  schedule:
+    - cron: "0 0 1 * *"
+
+  # Allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      tag_override:
+        description: "Override version tag (e.g. v2026.05-rc1)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Snap & Publish Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history for git log / tags
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install google-generativeai
+
+      # ── Determine version tag ──────────────────────────────────────────
+      - name: Compute version tag
+        id: version
+        run: |
+          if [ -n "${{ github.event.inputs.tag_override }}" ]; then
+            TAG="${{ github.event.inputs.tag_override }}"
+          else
+            TAG="v$(date +'%Y.%m')"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Tag: $TAG"
+
+      # ── Generate release notes ─────────────────────────────────────────
+      - name: Generate release notes
+        id: notes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/generate_release_notes.py "${{ steps.version.outputs.tag }}" \
+            > /tmp/release_notes.md
+          cat /tmp/release_notes.md
+
+      # ── Update VERSION file ────────────────────────────────────────────
+      - name: Update VERSION file
+        run: |
+          echo "${{ steps.version.outputs.tag }}" > VERSION
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION
+          git diff --staged --quiet || git commit -m "chore: bump version to ${{ steps.version.outputs.tag }}"
+          git push
+
+      # ── Create git tag ─────────────────────────────────────────────────
+      - name: Create tag
+        run: |
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      # ── Publish GitHub Release ─────────────────────────────────────────
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "Snapshot ${{ steps.version.outputs.tag }}" \
+            --notes-file /tmp/release_notes.md \
+            --latest

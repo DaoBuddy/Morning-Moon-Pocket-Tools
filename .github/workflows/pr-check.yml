@@ -1,0 +1,165 @@
+name: PR Check & Auto Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # ─────────────────────────────────────────────
+  # 1. Auto-reformat — normalize markdown tables
+  # ─────────────────────────────────────────────
+  reformat:
+    name: Auto Reformat
+    runs-on: ubuntu-latest
+    outputs:
+      reformatted: ${{ steps.commit.outputs.reformatted }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run reformat
+        run: python scripts/reformat.py
+
+      - name: Commit reformatted files
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "reformatted=false" >> "$GITHUB_OUTPUT"
+          else
+            git add monster-data_4.md resource_hp_data.md
+            git commit -m "chore: auto reformat markdown [skip ci]"
+            git push
+            echo "reformatted=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ─────────────────────────────────────────────
+  # 2. Validate — check format rules
+  # ─────────────────────────────────────────────
+  validate:
+    name: Validate Format
+    needs: reformat
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run validator
+        run: python scripts/validate.py
+
+  # ─────────────────────────────────────────────
+  # 3. Classify — new data or existing updated?
+  # ─────────────────────────────────────────────
+  classify:
+    name: Classify Changes
+    needs: validate
+    runs-on: ubuntu-latest
+    outputs:
+      change_type: ${{ steps.classify.outputs.change_type }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate diff against base branch
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }} -- monster-data_4.md resource_hp_data.md > /tmp/pr.diff
+
+      - name: Classify changes
+        id: classify
+        run: python scripts/classify_changes.py /tmp/pr.diff
+
+  # ─────────────────────────────────────────────
+  # 4a. Auto-merge — new data only, no conflicts
+  # ─────────────────────────────────────────────
+  auto-merge:
+    name: Auto Merge (New Data)
+    needs: classify
+    if: needs.classify.outputs.change_type == 'new'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Approve PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr review ${{ github.event.pull_request.number }} \
+            --approve \
+            --body "✅ **Auto-approved**: ข้อมูลใหม่เท่านั้น ไม่มี conflict — Merging automatically. / New data only, no conflicts — merging automatically."
+
+      - name: Merge PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} \
+            --squash \
+            --delete-branch \
+            --subject "data: merge new entries from PR #${{ github.event.pull_request.number }}"
+
+  # ─────────────────────────────────────────────
+  # 4b. Request review — existing data modified
+  # ─────────────────────────────────────────────
+  request-review:
+    name: Request Review (Updated Data)
+    needs: classify
+    if: needs.classify.outputs.change_type == 'update'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure needs-review label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "needs-review" \
+            --description "Existing data was modified — requires manual approval" \
+            --color "e4e669" \
+            2>/dev/null || true
+
+      - name: Add label to PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} \
+            --add-label "needs-review"
+
+      - name: Comment on PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body "$(cat <<'EOF'
+          ⚠️ **ต้องรอการอนุมัติ / Manual Review Required**
+
+          PR นี้มีการ**แก้ไขข้อมูลที่มีอยู่เดิม** ในไฟล์ข้อมูล
+          ระบบไม่สามารถ Auto-merge ได้ — กรุณารอให้เจ้าของโครงการตรวจสอบและอนุมัติ
+
+          ---
+
+          This PR **modifies existing data entries** in the data files.
+          Auto-merge is disabled — please wait for the project owner to review and approve.
+          EOF
+          )"
