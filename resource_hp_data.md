@@ -15,11 +15,12 @@ The more observations with different damage values, the narrower the intersectio
 
 **Energy cost:** 1 Action = 4 Energy
 
-| Stat name in game | Field |
-|-------------------|-------|
+| Stat name in game    | Field    |
+|----------------------|----------|
 | Wood Chopping Damage | Chopping |
-| Mineral Mining Damage | Breaking |
-| — (no stat) | Cutting |
+| Mineral Mining Damage | Mining  |
+| Rock Breaking Damage | Breaking |
+| — (no stat)          | Cutting  |
 
 ---
 
@@ -168,7 +169,7 @@ Copy this block for each new observation:
 ---
 
 ### Copper Ore
-- **Type:** Breaking
+- **Type:** Mining
 - **Reward:** 9 Copper
 
 | D (your damage) | A (hits needed) | HP range |
