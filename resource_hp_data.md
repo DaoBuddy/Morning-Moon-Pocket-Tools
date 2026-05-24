@@ -139,16 +139,17 @@ Copy this block for each new observation:
 
 ---
 
-### Red Apple Tree
+### Red Apple Tree / Round Tree
 - **Type:** Chopping
 - **Reward:** 9 Wood
 
 | D (your damage) | A (hits needed) | HP range |
 |-----------------|-----------------|----------|
-| 12 | 4 | 37 – 48 |
-| 5  | 9 | 41 – 45 |
+| 12              | 4               | 37 – 48  |
+| 5               | 9               | 41 – 45  |
+| 6               | 8               | 43 – 48  |
 
-**Estimated HP:** 41–45 _(intersection of both ranges)_
+**Estimated HP:** 43–45 _(intersection of all ranges)_
 
 ---
 
