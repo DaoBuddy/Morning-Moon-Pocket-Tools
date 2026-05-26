@@ -15,12 +15,12 @@ The more observations with different damage values, the narrower the intersectio
 
 **Energy cost:** 1 Action = 4 Energy
 
-| Stat name in game    | Field    |
-|----------------------|----------|
-| Wood Chopping Damage | Chopping |
-| Mineral Mining Damage | Mining  |
-| Rock Breaking Damage | Breaking |
-| — (no stat)          | Cutting  |
+| Stat name in game     | Field    |
+| --------------------- | -------- |
+| Wood Chopping Damage  | Chopping |
+| Mineral Mining Damage | Mining   |
+| Rock Breaking Damage  | Breaking |
+| — (no stat)           | Cutting  |
 
 ---
 
@@ -29,8 +29,8 @@ The more observations with different damage values, the narrower the intersectio
 Copy this block for each new observation:
 
 ```markdown
-| D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
+| D (your damage) | A (hits needed) | HP range        |
+| --------------- | --------------- | --------------- |
 | ?               | ?               | (A-1)×D+1 – A×D |
 ```
 
@@ -46,13 +46,13 @@ Copy this block for each new observation:
 ---
 
 ### Small Rock
-- **Type:** Cutting
+- **Type:** Breaking
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 5 | 1 | 1 – 5 |
+| --------------- | --------------- | -------- |
+| 5               | 1               | ≤5       |
 
-**Estimated HP:** 1–5
+**Estimated HP:** ≤5
 
 ---
 
@@ -60,10 +60,21 @@ Copy this block for each new observation:
 - **Type:** Chopping
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 5 | 1 | 1 – 5 |
+| --------------- | --------------- | -------- |
+| 5               | 1               | ≤5       |
 
-**Estimated HP:** 1–5
+**Estimated HP:** ≤5
+
+---
+
+### King Trumpet Mushroom
+- **Type:** Cutting
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 5               | 1               | ≤5       |
+
+**Estimated HP:** ≤5
 
 ---
 
@@ -71,10 +82,32 @@ Copy this block for each new observation:
 - **Type:** Cutting
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 5 | 1 | 1 – 5 |
+| --------------- | --------------- | -------- |
+| 5               | 1               | ≤5       |
 
-**Estimated HP:** 1–5
+**Estimated HP:** ≤5
+
+---
+
+### Shiitake Mushroom
+- **Type:** Cutting
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 5               | 1               | ≤5       |
+
+**Estimated HP:** ≤5
+
+---
+
+### White Button Mushroom
+- **Type:** Cutting
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 5               | 1               | ≤5       |
+
+**Estimated HP:** ≤5
 
 ---
 
@@ -82,11 +115,11 @@ Copy this block for each new observation:
 - **Type:** Breaking
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 5 | 2 | 6 – 10 |
+| --------------- | --------------- | -------- |
+| 5               | 2               | 6 – 10   |
+| 12              | 1               | 1 – 12   |
 
-**Estimated HP:** 6–10
-
+**Estimated HP:** 6–10 _(intersection of all ranges)_
 
 ---
 
@@ -95,10 +128,10 @@ Copy this block for each new observation:
 - **Reward:** 3 Wood
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 5 | 3 | 11 – 15 |
-| 6 | 3 | 12 – 15 |
-| 12 | 2 | 13 – 24 |
+| --------------- | --------------- | -------- |
+| 5               | 3               | 11 – 15  |
+| 6               | 3               | 12 – 15  |
+| 12              | 2               | 13 – 24  |
 
 **Estimated HP:** 13–24
 
@@ -109,7 +142,7 @@ Copy this block for each new observation:
 - **Reward:** 3 Stone
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
+| --------------- | --------------- | -------- |
 | 6               | 3               | 13 – 18  |
 | 12              | 2               | 13 – 24  |
 
@@ -122,7 +155,7 @@ Copy this block for each new observation:
 - **Reward:** 12 Stone
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
+| --------------- | --------------- | -------- |
 | 5               | 12              | 56 – 60  |
 | 12              | 5               | 49 – 60  |
 
@@ -135,8 +168,8 @@ Copy this block for each new observation:
 - **Reward:** 1 Honeycomb
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 6 | 2 | 7 – 12 |
+| --------------- | --------------- | -------- |
+| 6               | 2               | 7 – 12   |
 
 **Estimated HP:** 7–12
 
@@ -147,8 +180,8 @@ Copy this block for each new observation:
 - **Reward:** 9 Wood
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 12 | 2 | 13 – 24 |
+| --------------- | --------------- | -------- |
+| 12              | 2               | 13 – 24  |
 
 **Estimated HP:** 13–24
 
@@ -159,7 +192,7 @@ Copy this block for each new observation:
 - **Reward:** 9 Wood
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
+| --------------- | --------------- | -------- |
 | 12              | 4               | 37 – 48  |
 | 5               | 9               | 41 – 45  |
 | 6               | 8               | 43 – 48  |
@@ -174,11 +207,11 @@ Copy this block for each new observation:
 - **Reward:** 12 Wood
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
-| 5  | 12 | 56 – 60 |
-| 6  | 10 | 56 – 60 |
-| 10 | 6  | 51 – 60 |
-| 12 | 5  | 49 – 60 |
+| --------------- | --------------- | -------- |
+| 5               | 12              | 56 – 60  |
+| 6               | 10              | 56 – 60  |
+| 10              | 6               | 51 – 60  |
+| 12              | 5               | 49 – 60  |
 
 **Estimated HP:** 56–60 _(intersection of all ranges)_
 
@@ -189,7 +222,39 @@ Copy this block for each new observation:
 - **Reward:** 9 Copper
 
 | D (your damage) | A (hits needed) | HP range |
-|-----------------|-----------------|----------|
+| --------------- | --------------- | -------- |
 | 5               | 6               | 26 – 30  |
 
 **Estimated HP:** 26–30
+
+---
+
+### Metal Wood Crate
+- **Type:** Breaking
+- **Reward:** Random Items ( Stone x7 )
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 12              | 1               | 1 – 12   |
+
+**Estimated HP:** 1–12
+
+---
+
+### Wood Crate
+- **Type:** Breaking
+- **Reward:** Random Items ( Stone x3 )
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 12              | 1               | 1 – 12   |
+
+**Estimated HP:** 1–12
+
+---
+
+### Chest
+- **Type:** Free drop — no action required, no HP
+- **Drop:** x10 Wood, x10 Stone, Forest Loot Box (2%)
+
+---

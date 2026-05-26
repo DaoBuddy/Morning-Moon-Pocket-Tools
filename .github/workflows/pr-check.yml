@@ -65,11 +65,51 @@ jobs:
         run: python scripts/validate.py
 
   # ─────────────────────────────────────────────
-  # 3. Classify — new data or existing updated?
+  # 4. AI Review — Gemini 1.5 Flash via OpenRouter
+  # ─────────────────────────────────────────────
+  ai-review:
+    name: AI Review (Gemini)
+    needs: validate
+    runs-on: ubuntu-latest
+    outputs:
+      ai_result: ${{ steps.review.outputs.ai_result }}
+      ai_comment: ${{ steps.review.outputs.ai_comment }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate diff for AI
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }} -- monster-data_4.md resource_hp_data.md > /tmp/ai.diff
+
+      - name: Run AI review
+        id: review
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python scripts/ai_review.py /tmp/ai.diff
+        continue-on-error: true
+
+      - name: Post AI comment on PR
+        if: steps.review.outputs.ai_comment != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "${{ steps.review.outputs.ai_comment }}"
+
+  # ─────────────────────────────────────────────
+  # 5. Classify — new data or existing updated?
   # ─────────────────────────────────────────────
   classify:
     name: Classify Changes
-    needs: validate
+    needs: [validate, ai-review]
     runs-on: ubuntu-latest
     outputs:
       change_type: ${{ steps.classify.outputs.change_type }}
@@ -86,14 +126,20 @@ jobs:
       - name: Generate diff against base branch
         run: |
           git fetch origin ${{ github.base_ref }}
-          git diff origin/${{ github.base_ref }} -- monster-data_4.md resource_hp_data.md > /tmp/pr.diff
+          git diff --ignore-all-space origin/${{ github.base_ref }} -- monster-data_4.md resource_hp_data.md > /tmp/pr.diff
 
       - name: Classify changes
         id: classify
         run: python scripts/classify_changes.py /tmp/pr.diff
 
+      - name: Block auto-merge if AI found issues
+        if: needs.ai-review.outputs.ai_result == 'issues'
+        run: |
+          echo "⚠️ AI review found issues — overriding to 'update' to require manual review."
+          echo "change_type=update" >> "$GITHUB_OUTPUT"
+
   # ─────────────────────────────────────────────
-  # 4a. Auto-merge — new data only, no conflicts
+  # 6a. Auto-merge — new data only, no conflicts
   # ─────────────────────────────────────────────
   auto-merge:
     name: Auto Merge (New Data)
