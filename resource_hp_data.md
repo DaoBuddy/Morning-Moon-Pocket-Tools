@@ -163,6 +163,18 @@ Copy this block for each new observation:
 
 ---
 
+### Barrel
+- **Type:** Breaking
+- **Reward:** 1 Red Apple
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 12              | 3               | 25 – 36  |
+
+**Estimated HP:** 25–36
+
+---
+
 ### Beehive
 - **Type:** Breaking
 - **Reward:** 1 Honeycomb
@@ -231,7 +243,7 @@ Copy this block for each new observation:
 
 ### Metal Wood Crate
 - **Type:** Breaking
-- **Reward:** Random Items ( Stone x7 )
+- **Reward:** 7 Stone, 7 Wood, 1 Red Apple
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
@@ -243,18 +255,19 @@ Copy this block for each new observation:
 
 ### Wood Crate
 - **Type:** Breaking
-- **Reward:** Random Items ( Stone x3 )
+- **Reward:** 3 Stone, 3 Wood, 5 Grass, 1 Red Apple
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
 | 12              | 1               | 1 – 12   |
+| 5               | 2               | 6 – 10   |
 
-**Estimated HP:** 1–12
+**Estimated HP:** 6–10 _(intersection of all ranges)_
 
 ---
 
 ### Chest
 - **Type:** Free drop — no action required, no HP
-- **Drop:** x10 Wood, x10 Stone, Forest Loot Box (2%)
+- **Reward:** 10 Wood, 10 Stone, Forest Loot Box (2%), 1 Banana
 
 ---
