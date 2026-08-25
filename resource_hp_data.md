@@ -182,8 +182,9 @@ Copy this block for each new observation:
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
 | 6               | 2               | 7 – 12   |
+| 14              | 1               | 1 – 14   |
 
-**Estimated HP:** 7–12
+**Estimated HP:** 7–12 _(intersection of all ranges)_
 
 ---
 
@@ -229,6 +230,20 @@ Copy this block for each new observation:
 
 ---
 
+### Copper Ore (small)
+- **Type:** Mining
+- **Reward:** 3 Copper
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 5               | 6               | 26 – 30  |
+| 19              | 1               | 1 – 19   |
+
+**Estimated HP:** Contradictory data (26–30 vs 1–19)
+
+
+---
+
 ### Copper Ore
 - **Type:** Mining
 - **Reward:** 9 Copper
@@ -236,14 +251,40 @@ Copy this block for each new observation:
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
 | 5               | 6               | 26 – 30  |
+| 19              | 2               | 20 – 38  |
 
-**Estimated HP:** 26–30
+**Estimated HP:** 26–30 _(intersection of all ranges)_
 
 ---
 
+### Silver Ore (small)
+- **Type:** Mining
+- **Reward:** 3 Silver
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 19              | 2               | 20 – 38  |
+
+**Estimated HP:** 20–38
+
+---
+
+### Silver Ore
+- **Type:** Mining
+- **Reward:** 9 Silver
+
+| D (your damage) | A (hits needed) | HP range |
+| --------------- | --------------- | -------- |
+| 19              | 6               | 96 – 114 |
+
+**Estimated HP:** 96–114
+
+---
+
+
 ### Metal Wood Crate
 - **Type:** Breaking
-- **Reward:** 7 Stone, 7 Wood, 1 Red Apple
+- **Reward:** 7 Stone, 7 Wood, 10 Grass, 1 Red Apple
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
