@@ -48,7 +48,7 @@ Copy this block for each new observation:
 
 ### Small Rock
 - **Type:** Breaking
-- **Reward:** 1 Rock
+- **Reward:** 1 Stone
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
