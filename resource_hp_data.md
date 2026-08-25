@@ -236,10 +236,10 @@ Copy this block for each new observation:
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
-| 5               | 6               | 26 – 30  |
+| 5               | 2               | 6 - 10   |
 | 19              | 1               | 1 – 19   |
 
-**Estimated HP:** Contradictory data (26–30 vs 1–19)
+**Estimated HP:** 6-10
 
 
 ---
