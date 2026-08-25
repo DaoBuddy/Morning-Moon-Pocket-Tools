@@ -42,11 +42,13 @@ Copy this block for each new observation:
 
 ### Red Apple
 - **Type:** Free drop — no action required, no HP
+- **Reward:** 1 Red Apple
 
 ---
 
 ### Small Rock
 - **Type:** Breaking
+- **Reward:** 1 Rock
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
@@ -58,6 +60,7 @@ Copy this block for each new observation:
 
 ### Log
 - **Type:** Chopping
+- **Reward:** 1 Wood
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
@@ -69,6 +72,7 @@ Copy this block for each new observation:
 
 ### King Trumpet Mushroom
 - **Type:** Cutting
+- **Reward:** 1 King Trumpet Mushroom
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
@@ -78,8 +82,9 @@ Copy this block for each new observation:
 
 ---
 
-### Primrose / Grass / Tulip / Red Herb
+### Primrose / Grass / Tulip / Red Herb / Green Herb
 - **Type:** Cutting
+- **Reward:** 1 Primrose / Grass / Tulip / Red Herb / Green Herb
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
@@ -91,6 +96,7 @@ Copy this block for each new observation:
 
 ### Shiitake Mushroom
 - **Type:** Cutting
+- **Reward:** 1 Shiitake Mushroom
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
@@ -113,6 +119,7 @@ Copy this block for each new observation:
 
 ### Pine Cone
 - **Type:** Breaking
+- **Reward:** 1 Pine Cone
 
 | D (your damage) | A (hits needed) | HP range |
 | --------------- | --------------- | -------- |
